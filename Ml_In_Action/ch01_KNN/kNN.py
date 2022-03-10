@@ -110,7 +110,7 @@ def img2vector(filename):
 # 使用k-近邻算法识别手写数字系统
 def handwritingclasstest():
     hwLabels = []
-    trainingFileList = os.listdir('trainingDigits')
+    trainingFileList = os.listdir('E:\\projects\\python\\PyProject\\Ml_In_Action\\ch01_KNN\\trainingDigits')
     m = len(trainingFileList)
     trainingMat = zeros((m, 1024))
     for i in range(m):
@@ -119,15 +119,16 @@ def handwritingclasstest():
         fileStr = fileNameStr.split('.')[0]
         classNumStr = int(fileStr.split('_')[0])
         hwLabels.append(classNumStr)
-        trainingMat[i, :] = img2vector('trainingDigits/%s' % fileNameStr)
-    testFileList = os.listdir('testDigits')
+        trainingMat[i, :] = img2vector('E:\\projects\\python\PyProject\\Ml_In_Action\\ch01_KNN\\trainingDigits/%s' % fileNameStr)
+    # 测试集
+    testFileList = os.listdir('E:\\projects\\python\\PyProject\\Ml_In_Action\\ch01_KNN\\testDigits')
     errorCount = 0.0
     mTest = len(testFileList)
     for i in range(mTest):
         fileNameStr = testFileList[i]
         fileStr = fileNameStr.split('.')[0]
         classNumStr = int(fileStr.split('_')[0])
-        vectorUnderTest = img2vector('testDigits/%s' % fileNameStr)
+        vectorUnderTest = img2vector('E:\\projects\\python\\PyProject\\Ml_In_Action\\ch01_KNN\\testDigits/%s' % fileNameStr)
         classifilerResult = classify0(vectorUnderTest, trainingMat, hwLabels, 3)
         print("the classifier came back with: %d, the real answer is:%d", classifilerResult, classNumStr)
         if classifilerResult != classNumStr:
@@ -136,10 +137,11 @@ def handwritingclasstest():
     print("\nthe total error rate is:%f" % (errorCount/float(mTest)))
 
 
-
 if __name__ == '__main__':
     # 分类器针对约会网站的测试。最后输出错误率
-    datingcalsstest()
+    # datingcalsstest()
+    # 手写系统
+    handwritingclasstest()
     # group, labels = createDataSet()
     # print(classify0([0, 0.1], group, labels, 3))
     # returnMat, classLabelVector = file2matrix('E:\projects\python\PyProject\Ml_In_Action\ch01_KNN\datingTestSet2.txt')
